@@ -17,3 +17,6 @@ Luetteloon lisätään vain nimiä.
 Jos lisättävä nimi on jo sovelluksen tiedossa, estä lisäys.   
 Tiedonanto erillisellä Notification komponentilla.  
 
+2.8: puhelinluettelo step3 - tallennettu git branch par2-8step3  
+Sovellus mahdollistaa numeron tallentamisen.  
+
