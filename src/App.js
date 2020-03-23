@@ -1,23 +1,27 @@
-// HY MOOC 2.6: puhelinluettelo step1
+// HY MOOC puhelinluettelo versio 2
 
 
 import React, { useState } from 'react'
 
 // Component imports
 import Notifications from './components/Notification'
+import DisplayNamesNumbers from './components/DisplayNamesNumbers'
 
 
 
 
 // Start of App()
+
 const App = () => {
   const [ persons, setPersons] = useState([
     { name: 'Arto', number: '012' },
-    { name: 'Marko', number: '123'}
+    { name: 'Marko', number: '123'},
+    { name: 'Jaska Jokunen', number: '0400 124 567'}
   ]) 
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState ('')
   const [ errorMessage, setErrorMessage ] = useState('')
+  const [ filterString, setFilterString] = useState('')
 
 
 // Eventhandler for Add button. Set a new name and number to "persons" object.
@@ -55,39 +59,43 @@ const handleNumberChange =(event) => {
   setNewNumber(event.target.value)
 }
 
+// Event handler to record inputing filter for names  
+const handleFilterStringInput = (event) => {
+  setFilterString(event.target.value)
+}
+
+
   return (
     <div>
       <h3>Phonebook</h3>
 
       <Notifications message={errorMessage}/>
 
-      {/* Name and number imput */}
+      {/* Name search imput */}
+      <div className='mt-5'>
+        Search name <input className='form-control' value={filterString} onChange={handleFilterStringInput}/>
+      </div>
+
+
+      {/* Name and number input */}
       <form className='mt-4' onSubmit={handleAddName}>
         <div>
-          Name: <input autoFocus className='form-control' value={newName} onChange={handleNameChange}/>
+          Add new name<input autoFocus className='form-control' value={newName} onChange={handleNameChange}/>
         </div>
 
         <div>
-          Number: <input className='form-control' value={newNumber} onChange={handleNumberChange}/>
+          Add number for a new name<input className='form-control' value={newNumber} onChange={handleNumberChange}/>
         </div>
 
         <div>
-          <button className="mt-3 btn btn-outline-primary" type="submit">Add</button>
+          <button className="mt-3 btn btn-outline-primary" type="submit">Add to phonebook</button>
         </div>
       </form>
       
-      {/* Table to display names and numbers */}
-      <table className="table mt-5">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {persons.map(person => <tr key={person.name}><td>{person.name}</td><td>{person.number}</td></tr>)}
-        </tbody>
-      </table>
+      {/* Component to display names and numbers */}
+      <DisplayNamesNumbers 
+        persons={persons} 
+        filterString={filterString} />
 
     </div>
   )

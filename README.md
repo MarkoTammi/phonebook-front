@@ -20,3 +20,9 @@ Tiedonanto erillisellä Notification komponentilla.
 2.8: puhelinluettelo step3 - tallennettu git branch par2-8step3  
 Sovellus mahdollistaa numeron tallentamisen.  
 
+2.9*: puhelinluettelo step4  
+Nimien filteröinti  
+
+2.10: puhelinluettelo step5 - git branch par2-10step5  
+Sovelluksen refaktorointi  
+
