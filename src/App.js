@@ -3,13 +3,20 @@
 
 import React, { useState } from 'react'
 
+// Component imports
+import Notifications from './components/Notification'
 
+
+
+
+// Start of App()
 const App = () => {
   const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas' },
-    { name: 'Marko Tammi'}
+    { name: 'Arto' },
+    { name: 'Marko'}
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [ errorMessage, setErrorMessage ] = useState('')
 
 
 // Eventhandler for Add button. Set a new name to "persons" object.
@@ -19,13 +26,24 @@ const handleAddName = (event) => {
     const nameObject = {
       name: newName
     }
-    setPersons(persons.concat(nameObject))
+
+    // Add name to person object if not already exist
+    if ((persons.map(person => person.name).includes(newName)) === false ) {
+      setPersons(persons.concat(nameObject))
+    } else {
+      setErrorMessage(`${newName} is not added because its already added to phonebook!`)
+      
+      // 'Name already exist' message is displayed 4 sek
+      setTimeout(() => {
+        setErrorMessage('')}, 4000)
+    }
+
+    //setPersons(persons.concat(nameObject))
     setNewName('')
-}
+} // end of eventhandler
 
 // Eventhandler to record a new name input typing 
 const handleNameChange =(event) => {
-  // console.log(event.target.value)
   setNewName(event.target.value)
 }
 
@@ -34,9 +52,11 @@ const handleNameChange =(event) => {
     <div>
       <h3>Phonebook</h3>
 
-      <form onSubmit={handleAddName}>
+      <Notifications message={errorMessage}/>
+
+      <form className='mt-4' onSubmit={handleAddName}>
         <div>
-          Name: <input value={newName} onChange={handleNameChange}/>
+          Name: <input className='form-control' value={newName} onChange={handleNameChange}/>
         </div>
         <div>
           <button className="mt-3 btn btn-outline-primary" type="submit">Add</button>

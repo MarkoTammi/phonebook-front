@@ -10,5 +10,10 @@ käynnistys - npm start >> localhost:3000
 
 ### Edistyminen
 
-2.6: puhelinluettelo step1 - tallennettu git branch par2-6step1
+2.6: puhelinluettelo step1 - tallennettu git branch par2-6step1  
 Luetteloon lisätään vain nimiä.
+
+2.7: puhelinluettelo step2 - tallennettu git branch par2-6step2  
+Jos lisättävä nimi on jo sovelluksen tiedossa, estä lisäys.   
+Tiedonanto erillisellä Notification komponentilla.  
+
