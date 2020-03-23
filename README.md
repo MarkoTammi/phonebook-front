@@ -25,4 +25,5 @@ Nimien filteröinti
 
 2.10: puhelinluettelo step5 - git branch par2-10step5  
 Sovelluksen refaktorointi  
+If -lause poistettu DisplayNamesNumbers komponentista  
 
