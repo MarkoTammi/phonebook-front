@@ -8,18 +8,13 @@ import Notifications from './components/Notification'
 import DisplayNamesNumbers from './components/DisplayNamesNumbers'
 
 // Services
-import personServices from './services/persons' // Communication with db.json file
+import personServices from './services/persons' // Communication with local db.json file
 
 
 // Start of App()
 
 const App = () => {
-  // No used if db.json
-  /* const [ persons, setPersons] = useState([
-    { name: 'Arto', number: '012' },
-    { name: 'Marko', number: '123'},
-    { name: 'Jaska Jokunen', number: '0400 124 567'}
-  ])  */
+
   const [ persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState ('')
@@ -38,21 +33,30 @@ const App = () => {
               //setPersons(response.data.filter(n => n.name !== undefined))
           })
     }
-    useEffect(hookToGetNamesNumbers,[])
+  useEffect(hookToGetNamesNumbers,[])
 
 
 // Eventhandler for Add button. Set a new name and number to "persons" object.
 const handleAddName = (event) => {
     event.preventDefault()
-    const nameNameNumberObject = {
+    const newNameNumberObject = {
       name: newName,
       number: newNumber
     }
 
-    // Add name to person object if not already exist
+    // Add name to db.json if not already exist
     if ((persons.map(person => person.name).includes(newName)) === false ) {
-      setPersons(persons.concat(nameNameNumberObject))
+      //setPersons(persons.concat(newNameNumberObject)) - Local persons object in front code.
+
+      // Name and number is added to db.json
+      personServices
+      .createPerson(newNameNumberObject)
+      .then(response => {
+          setPersons(persons.concat(response.data))
+      })
+
     } else {
+      // Name is not added because its already exist
       setErrorMessage(`${newName} is not added because its already in the phonebook!`)
       
       // 'Name already exist' message is displayed 4 sek

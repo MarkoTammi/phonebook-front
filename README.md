@@ -7,7 +7,7 @@ luotu - npx create-react-app phonebook-front
 bootstrap tyylit
 
 ### Käynnistys  
-front - npm start >> localhost:3000
+front - npm start >> localhost:3000  
 tehtävästä 2.11 eteenpäin myös  
 json server - npm run server  
 
@@ -38,4 +38,13 @@ Asennettu json-server sovelluskehityksen aikaiseksi riippuvuudeksi
 npm install json-server --save-dev  
 Muokattu package.json  
 "server": "json-server -p3001 --watch db.json"  
+
+
+2.15: puhelinluettelo step7  
+Uusi nimi ja numero tallennetaan db.json  
+
+2.16: puhelinluettelo step8  - git branch par2-16step8
+personServices moduli omana  
+
+
 
