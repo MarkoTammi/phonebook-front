@@ -16,7 +16,16 @@ const DisplayNamesNumbers = (props) => {
             {<DisplayTableHeader />}
             <tbody>
                 {filteredPersons.map(person => 
-                    <tr key={person.name}><td>{person.name}</td><td>{person.number}</td></tr>)}
+                    <tr key={person.id}>
+                        <td>{person.name}</td>
+                        <td>{person.number}</td>
+                        {/* <td>{person.id}</td> */}
+                        <td><button 
+                            type="button"
+                            className="btn btn-outline-secondary btn-sm" 
+                            onClick={ () => props.handleRemoveName(person)}
+                            >Remove</button></td>
+                    </tr>)}
             </tbody>
         </table>
     )

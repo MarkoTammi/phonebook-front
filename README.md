@@ -43,8 +43,18 @@ Muokattu package.json
 2.15: puhelinluettelo step7  
 Uusi nimi ja numero tallennetaan db.json  
 
-2.16: puhelinluettelo step8  - git branch par2-16step8
+2.16: puhelinluettelo step8  - git branch par2-16step8  
 personServices moduli omana  
+
+2.17: puhelinluettelo step9  - git branch par2-17step9  
+Nimen poisto luettelosta  
+
+2.18*: puhelinluettelo step10 - git branch par2-18step10  
+Nimen päivitys uudella numerolla  
+Notification komponentti poistettu käytästä  
+
+
+
 
 
 

@@ -18,7 +18,7 @@ const App = () => {
   const [ persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState ('')
-  const [ errorMessage, setErrorMessage ] = useState('')
+  const [ message, setMessage ] = useState('')
   const [ filterString, setFilterString] = useState('')
 
 
@@ -51,23 +51,67 @@ const handleAddName = (event) => {
       // Name and number is added to db.json
       personServices
       .createPerson(newNameNumberObject)
-      .then(response => {
-          setPersons(persons.concat(response.data))
-      })
+
+      //Only front object is updated
+/*       .then(response => {
+          setPersons(persons.concat(response.data)) */
+
+      // Get all names and numbers from db.json
+          .then(() => {
+            personServices.getAllPersons()
+        .then(response => {
+            setPersons(response.data)
+          })
+        })
 
     } else {
-      // Name is not added because its already exist
-      setErrorMessage(`${newName} is not added because its already in the phonebook!`)
-      
-      // 'Name already exist' message is displayed 4 sek
-      setTimeout(() => {
-        setErrorMessage('')}, 4000)
-    }
 
+      // Name already exist in phonebook -> update number
+      if (window.confirm(`${newName} is already in a phonebook. Do you want to update the number?`)) {
+        const personToUpdate = persons.filter(person => person.name === newNameNumberObject.name )
+        const personUpdateObject = {
+            name: personToUpdate[0].name,
+            number: newNumber,
+            id: personToUpdate[0].id,
+            }
+
+        // Update db.json and get all names and numbers
+        personServices
+            .updatePerson(personUpdateObject, personToUpdate[0].id)
+            .then( () => {
+                personServices.getAllPersons()
+            .then(response => {
+                setPersons(response.data)
+            })
+          })
+
+      // Name is not added because its already exist. This was before update function
+      //setMessage(`${newName} is not added because its already in the phonebook!`)
+      // 'Name already exist' message is displayed 4 sek
+      //setTimeout(() => {
+        //setMessage('')}, 4000)
+        //  }
+    }
     setNewName('')
     setNewNumber('')
-} // end of eventhandler
+    
+  }}// end of eventhandler handleAddName
 
+// Eventhandler for Remove button. Selected name is removed from db.json.
+const handleRemoveName = (props) => {
+  console.log('handleRemoveName', props)
+  if (window.confirm(`Delete ${props.name} ?`)) {
+    personServices
+        .deletePerson(props.id)
+        .then(() => {
+            //setPersons(persons.filter(person => person.id !== props.id)) - only local frontend is updated
+            personServices.getAllPersons()
+        .then(response => {
+            setPersons(response.data)
+          })
+        })
+  }
+}
 
 // Eventhandler to record a new name input typing 
 const handleNameChange =(event) => {
@@ -89,7 +133,7 @@ const handleFilterStringInput = (event) => {
     <div>
       <h3>Phonebook</h3>
 
-      <Notifications message={errorMessage}/>
+      <Notifications message={message}/>
 
       {/* Name search imput */}
       <div className='mt-5'>
@@ -115,7 +159,8 @@ const handleFilterStringInput = (event) => {
       {/* Component to display names and numbers */}
       <DisplayNamesNumbers 
         persons={persons} 
-        filterString={filterString} />
+        filterString={filterString}
+        handleRemoveName={handleRemoveName} />
 
     </div>
   )
