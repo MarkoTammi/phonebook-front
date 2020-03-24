@@ -1,33 +1,49 @@
 // HY MOOC puhelinluettelo versio 2
 
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 // Component imports
 import Notifications from './components/Notification'
 import DisplayNamesNumbers from './components/DisplayNamesNumbers'
 
-
+// Services
+import personServices from './services/persons' // Communication with db.json file
 
 
 // Start of App()
 
 const App = () => {
-  const [ persons, setPersons] = useState([
+  // No used if db.json
+  /* const [ persons, setPersons] = useState([
     { name: 'Arto', number: '012' },
     { name: 'Marko', number: '123'},
     { name: 'Jaska Jokunen', number: '0400 124 567'}
-  ]) 
+  ])  */
+  const [ persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState ('')
   const [ errorMessage, setErrorMessage ] = useState('')
   const [ filterString, setFilterString] = useState('')
 
 
+
+  // useEffect/Hook too get names and numbers for phonebook from local db.json file
+  const hookToGetNamesNumbers = () => {
+      personServices
+          .getAllPersons()
+          .then(response => {
+              //console.log('getAllPerson: ', response)
+              setPersons(response.data)
+              //setPersons(response.data.filter(n => n.name !== undefined))
+          })
+    }
+    useEffect(hookToGetNamesNumbers,[])
+
+
 // Eventhandler for Add button. Set a new name and number to "persons" object.
 const handleAddName = (event) => {
     event.preventDefault()
-    //console.log('addName clicked', event.target)
     const nameNameNumberObject = {
       name: newName,
       number: newNumber
@@ -37,7 +53,7 @@ const handleAddName = (event) => {
     if ((persons.map(person => person.name).includes(newName)) === false ) {
       setPersons(persons.concat(nameNameNumberObject))
     } else {
-      setErrorMessage(`${newName} is not added because its already added to phonebook!`)
+      setErrorMessage(`${newName} is not added because its already in the phonebook!`)
       
       // 'Name already exist' message is displayed 4 sek
       setTimeout(() => {
