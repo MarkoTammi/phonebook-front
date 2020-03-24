@@ -32,6 +32,10 @@ const App = () => {
               setPersons(response.data)
               //setPersons(response.data.filter(n => n.name !== undefined))
           })
+          .catch(error => {
+              setMessage(`Json server doesn't resonse. Start json server "npm run server".`)})
+          setTimeout( () => {
+              setMessage('')}, 8000)
     }
   useEffect(hookToGetNamesNumbers,[])
 
@@ -46,15 +50,10 @@ const handleAddName = (event) => {
 
     // Add name to db.json if not already exist
     if ((persons.map(person => person.name).includes(newName)) === false ) {
-      //setPersons(persons.concat(newNameNumberObject)) - Local persons object in front code.
 
       // Name and number is added to db.json
       personServices
-      .createPerson(newNameNumberObject)
-
-      //Only front object is updated
-/*       .then(response => {
-          setPersons(persons.concat(response.data)) */
+        .createPerson(newNameNumberObject)
 
       // Get all names and numbers from db.json
           .then(() => {
@@ -63,6 +62,11 @@ const handleAddName = (event) => {
             setPersons(response.data)
           })
         })
+
+      // Notification message
+      setMessage(`${newName} was added to the phonebook.`)
+      setTimeout( () => {
+          setMessage('')}, 4000)
 
     } else {
 
@@ -85,31 +89,33 @@ const handleAddName = (event) => {
             })
           })
 
-      // Name is not added because its already exist. This was before update function
-      //setMessage(`${newName} is not added because its already in the phonebook!`)
-      // 'Name already exist' message is displayed 4 sek
-      //setTimeout(() => {
-        //setMessage('')}, 4000)
-        //  }
+      // Notification message
+      setMessage(`${newName} was updated with new number ${newNumber}`)
+      setTimeout(() => {
+          setMessage('')}, 4000)
     }
     setNewName('')
     setNewNumber('')
     
   }}// end of eventhandler handleAddName
 
+
 // Eventhandler for Remove button. Selected name is removed from db.json.
 const handleRemoveName = (props) => {
-  console.log('handleRemoveName', props)
+  //console.log('handleRemoveName', props)
   if (window.confirm(`Delete ${props.name} ?`)) {
     personServices
         .deletePerson(props.id)
         .then(() => {
-            //setPersons(persons.filter(person => person.id !== props.id)) - only local frontend is updated
             personServices.getAllPersons()
         .then(response => {
             setPersons(response.data)
           })
         })
+    // Notification message
+    setMessage(`${props.name} was removed.`)
+      setTimeout( () => {
+        setMessage('')}, 4000)
   }
 }
 

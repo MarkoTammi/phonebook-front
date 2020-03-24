@@ -53,6 +53,8 @@ Nimen poisto luettelosta
 Nimen päivitys uudella numerolla  
 Notification komponentti poistettu käytästä  
 
+2.19: puhelinluettelo step11 - git branch par2-19step11   
+Notification komponentti otettu käyttöön ja lisätty ilmoituksia käyttäjälle.  
 
 
 
