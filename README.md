@@ -59,6 +59,7 @@ Notification komponentti otettu käyttöön ja lisätty ilmoituksia käyttäjäl
 2.20*: puhelinluettelo step12 - git branch par2-20step12  
 Virheenkäsittely lisäys/päivitys käsittelijään jos nimeä ei löydy db'stä  
 Nimet näytetään aakkosjärjestyksessä.  
+setTimeout poistettu virheilmoituksesta jos json srv ei ole päällä.  
 
 Puhelinluettelo on valmis. Kaikki tehtävät on tehty.   
 

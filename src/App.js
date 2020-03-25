@@ -34,9 +34,7 @@ const App = () => {
               //setPersons(response.data.filter(n => n.name !== undefined))
           })
           .catch(error => {
-              setMessage(`Json server doesn't resonse. Start json server "npm run server".`)})
-          setTimeout( () => {
-              setMessage('')}, 8000)
+              setMessage(`Json server doesn't response. Start json server "npm run server" and refresh browser.`)})
     }
   useEffect(hookToGetNamesNumbers,[])
 
