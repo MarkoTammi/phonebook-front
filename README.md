@@ -3,8 +3,8 @@
 
 ## HY / Fullstack MOOC / Phonebook v2
 
-luotu - npx create-react-app phonebook-front
-bootstrap tyylit
+luotu - npx create-react-app phonebook-front  
+bootstrap tyylit  
 
 ### Käynnistys  
 front - npm start >> localhost:3000  
