@@ -11,6 +11,7 @@ const DisplayTableHeader = () => {
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Number</th>
+                <th scope="col">Id</th>
                 <th></th>
               </tr>
             </thead>

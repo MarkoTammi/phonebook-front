@@ -23,7 +23,8 @@ const App = () => {
 
 
 
-  // useEffect/Hook too get names and numbers for phonebook from local db.json file
+// useEffect/Hook too get names and numbers for phonebook from local db.json file
+// Only startup phase
   const hookToGetNamesNumbers = () => {
       personServices
           .getAllPersons()
@@ -40,7 +41,7 @@ const App = () => {
   useEffect(hookToGetNamesNumbers,[])
 
 
-// Eventhandler for Add button. Set a new name and number to "persons" object.
+// Eventhandler for Add/update button. Set a new/update name and number to "persons" object.
 const handleAddName = (event) => {
     event.preventDefault()
     const newNameNumberObject = {
@@ -64,7 +65,7 @@ const handleAddName = (event) => {
         })
 
       // Notification message
-      setMessage(`${newName} was added to the phonebook.`)
+      setMessage(`${newName} added to the phonebook.`)
       setTimeout( () => {
           setMessage('')}, 4000)
 
@@ -83,21 +84,29 @@ const handleAddName = (event) => {
         personServices
             .updatePerson(personUpdateObject, personToUpdate[0].id)
             .then( () => {
-                personServices.getAllPersons()
+                personServices.getAllPersons()})
             .then(response => {
                 setPersons(response.data)
-            })
-          })
-
-      // Notification message
-      setMessage(`${newName} was updated with new number ${newNumber}`)
-      setTimeout(() => {
-          setMessage('')}, 4000)
-    }
+                // Notification message
+                setMessage(`${newName} updated with new number ${newNumber}`)
+                setTimeout(() => {
+                    setMessage('')}, 4000)  
+              })
+            .catch(error => {
+                setMessage(`Update fails because ${newName} has been already deleted from database.`)
+                setTimeout(() => {
+                  setMessage('')}, 4000)
+                personServices
+                  .getAllPersons()
+                  .then(response => {
+                      setPersons(response.data)
+                  })
+              })
+    }}
     setNewName('')
     setNewNumber('')
     
-  }}// end of eventhandler handleAddName
+  }// end of eventhandler handleAddName
 
 
 // Eventhandler for Remove button. Selected name is removed from db.json.
@@ -158,7 +167,7 @@ const handleFilterStringInput = (event) => {
         </div>
 
         <div>
-          <button className="mt-3 btn btn-outline-primary" type="submit">Add to phonebook</button>
+          <button className="mt-3 btn btn-outline-primary" type="submit">Add / update</button>
         </div>
       </form>
       
@@ -167,6 +176,8 @@ const handleFilterStringInput = (event) => {
         persons={persons} 
         filterString={filterString}
         handleRemoveName={handleRemoveName} />
+
+      <p className="mt-5 font-weight-light">HY / Fullstack MOOC / Phonebook v2 by MarkoTammi</p>
 
     </div>
   )

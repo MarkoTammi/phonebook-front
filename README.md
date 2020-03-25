@@ -1,7 +1,7 @@
 
 
 
-## HY / MOOC / Phonebook front v2
+## HY / Fullstack MOOC / Phonebook v2
 
 luotu - npx create-react-app phonebook-front
 bootstrap tyylit
@@ -44,7 +44,7 @@ Muokattu package.json
 Uusi nimi ja numero tallennetaan db.json  
 
 2.16: puhelinluettelo step8  - git branch par2-16step8  
-personServices moduli omana  
+personServices (kommunikointi db.json) moduli omana  
 
 2.17: puhelinluettelo step9  - git branch par2-17step9  
 Nimen poisto luettelosta  
@@ -56,6 +56,11 @@ Notification komponentti poistettu käytästä
 2.19: puhelinluettelo step11 - git branch par2-19step11   
 Notification komponentti otettu käyttöön ja lisätty ilmoituksia käyttäjälle.  
 
+2.20*: puhelinluettelo step12 - git branch par2-20step12
+Virheenkäsittely lisäys/päivitys käsittelijään jos nimeä ei löydy db'stä  
+Nimet näytetään aakkosjärjestyksessä.  
+
+Puhelinluettelo on valmis. Kaikki tehtävät on tehty.   
 
 
 
