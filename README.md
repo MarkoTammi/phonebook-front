@@ -8,8 +8,14 @@ bootstrap tyylit
 
 ### Käynnistys  
 front - npm start >> localhost:3000  
-tehtävästä 2.11 eteenpäin myös  
+
+Tehtävästä 2.11 eteenpäin myös  
 json server - npm run server  
+
+Tehtävästä 3.9 front kommunikoi backendin kanssa.
+Ei enään json server    
+backend srv: npm run dev >> localhost:3001  
+
 
 ### Edistyminen
 
@@ -61,7 +67,15 @@ Virheenkäsittely lisäys/päivitys käsittelijään jos nimeä ei löydy db'st�
 Nimet näytetään aakkosjärjestyksessä.  
 setTimeout poistettu virheilmoituksesta jos json srv ei ole päällä.  
 
-Puhelinluettelo on valmis. Kaikki tehtävät on tehty.   
+
+Koodaus jatkuu frontin ja backendin yhdistämisellä.  
+
+3.9 puhelinluettelon backend step9  
+Muokattu baseurl  
+
+Frontend ja backend kommunikoivat nyt paitsi numeron päivitys.  
+
+
 
 
 

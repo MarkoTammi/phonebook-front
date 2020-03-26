@@ -1,10 +1,9 @@
 
-// Services to communicate with db.json file
-
+// Services to communicate with phonebook backend
 
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = 'http://localhost:3001/api/persons'
 
 const getAllPersons = () => {
   return axios.get(baseUrl)
