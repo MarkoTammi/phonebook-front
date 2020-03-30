@@ -75,6 +75,19 @@ Muokattu baseurl
 
 Frontend ja backend kommunikoivat nyt paitsi numeron päivitys.  
 
+3.20*: puhelinluettelo ja tietokanta, step8  
+Tehty päivityksiä frontendiin osana backendin laajennusta.  
+Numeron päivitys toimii.  
+Lisätty backendin virheenkäsittelyn fronttiin ja virheilmoitukset UIhin.  
+
+
+
+
+
+
+
+
+
 
 
 

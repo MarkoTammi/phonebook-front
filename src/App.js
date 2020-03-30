@@ -34,7 +34,7 @@ const App = () => {
               //setPersons(response.data.filter(n => n.name !== undefined))
           })
           .catch(error => {
-              setMessage(`Json server doesn't response. Start json server "npm run server" and refresh browser.`)})
+              setMessage(`Backend server doesn't response. Start server and refresh browser.`)})
     }
   useEffect(hookToGetNamesNumbers,[])
 
@@ -47,25 +47,37 @@ const handleAddName = (event) => {
       number: newNumber
     }
 
-    // Add name to db.json if not already exist
+    // Add name to db if not already exist
     if ((persons.map(person => person.name).includes(newName)) === false ) {
 
-      // Name and number is added to db.json
-      personServices
-        .createPerson(newNameNumberObject)
+        // Name and number is added to db
+        personServices
+            .createPerson(newNameNumberObject)
+            // Get all names and numbers from db
+            .then(() => {
+                personServices.getAllPersons()
+                .then(response => {
+                    setPersons(response.data)
+                    // Notification message
+                    setMessage(`${newName} added to the phonebook.`)
+                    setTimeout( () => {
+                        setMessage('')}, 4000)
+                })
+            })
+            .catch(error => {
+                //console.log(error.response.data)
+                // Notification message
+                const startIndex=error.response.data.indexOf("Person validation failed:")
+                const stopIndex=error.response.data.indexOf("<br>")
 
-      // Get all names and numbers from db.json
-          .then(() => {
-            personServices.getAllPersons()
-        .then(response => {
-            setPersons(response.data)
-          })
-        })
+                const msg= error.response.data.slice(startIndex,stopIndex)
+                setMessage(`${msg}`)
 
-      // Notification message
-      setMessage(`${newName} added to the phonebook.`)
-      setTimeout( () => {
-          setMessage('')}, 4000)
+                setTimeout( () => {
+                    setMessage('')}, 6000)
+            })
+
+
 
     } else {
 
@@ -78,28 +90,36 @@ const handleAddName = (event) => {
             id: personToUpdate[0].id,
             }
 
-        // Update db.json and get all names and numbers
+        // Update db and get all names and numbers
         personServices
             .updatePerson(personUpdateObject, personToUpdate[0].id)
-            .then( () => {
-                personServices.getAllPersons()})
-            .then(response => {
-                setPersons(response.data)
-                // Notification message
-                setMessage(`${newName} updated with new number ${newNumber}`)
-                setTimeout(() => {
-                    setMessage('')}, 4000)  
-              })
+            .then(() => {
+                personServices.getAllPersons()
+                .then(response => {
+                    setPersons(response.data)
+                    // Notification message
+                    setMessage(`${newName} updated with new number ${newNumber}`)
+                    setTimeout(() => {
+                        setMessage('')}, 4000)  
+                })
+            })
             .catch(error => {
-                setMessage(`Update fails because ${newName} has been already deleted from database.`)
+                //console.log(error.response.data)
+
+                const startIndex=error.response.data.indexOf("Validation failed:")
+                const stopIndex=error.response.data.indexOf("<br>")
+
+                const msg= error.response.data.slice(startIndex,stopIndex)
+                setMessage(`${msg}`)
+
                 setTimeout(() => {
-                  setMessage('')}, 4000)
+                  setMessage('')}, 6000)
                 personServices
                   .getAllPersons()
                   .then(response => {
                       setPersons(response.data)
-                  })
-              })
+                })
+            })
     }}
     setNewName('')
     setNewNumber('')
@@ -107,7 +127,7 @@ const handleAddName = (event) => {
   }// end of eventhandler handleAddName
 
 
-// Eventhandler for Remove button. Selected name is removed from db.json.
+// Eventhandler for Remove button. Selected name is removed from db.
 const handleRemoveName = (props) => {
   //console.log('handleRemoveName', props)
   if (window.confirm(`Delete ${props.name} ?`)) {
