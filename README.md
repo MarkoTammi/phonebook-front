@@ -80,6 +80,24 @@ Tehty päivityksiä frontendiin osana backendin laajennusta.
 Numeron päivitys toimii.  
 Lisätty backendin virheenkäsittelyn fronttiin ja virheilmoitukset UIhin.  
 
+3.22: lint-konfiguraatio  - git branch part3-22  
+Asennettu npm install eslint --save-dev  
+Muodostettu alustava konfis  
+node_modules/.bin/eslint --init 
+konfis tallentuu .eslintrc.js tiedostoon   
+Luotu .eslintignore tiedosto  
+npm run lint   
+Korjattu Eslintin ilmoittavat virheet  
+
+Kaikki ja viimeinen tehtävä tehty.
+Huomioita  
+- backendin APIt ilman authentication  
+
+
+-- END --  
+
+
+
 
 
 

@@ -181,7 +181,7 @@ const handleFilterStringInput = (event) => {
         </div>
 
         <div>
-          Add number for a new name<input className='form-control' value={newNumber} onChange={handleNumberChange}/>
+          Number<input className='form-control' value={newNumber} onChange={handleNumberChange}/>
         </div>
 
         <div>

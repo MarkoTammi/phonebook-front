@@ -20,7 +20,7 @@ const DisplayNamesNumbers = (props) => {
                     <tr key={person.id}>
                         <td>{person.name}</td>
                         <td>{person.number}</td>
-                        <td>{person.id}</td>
+                        {/* <td>{person.id}</td> */}
                         <td><button 
                             type="button"
                             className="btn btn-outline-secondary btn-sm" 
