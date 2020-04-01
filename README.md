@@ -6,6 +6,10 @@
 luotu - npx create-react-app phonebook-front  
 bootstrap tyylit  
 
+Viimeisin versio tehtävän 3-22 jälkeen tallennettu github-master.  
+Välitallenukset omissa haaroissa tehtävänumeron mukaan.  
+
+
 ### Käynnistys  
 front - npm start >> localhost:3000  
 
@@ -80,7 +84,7 @@ Tehty päivityksiä frontendiin osana backendin laajennusta.
 Numeron päivitys toimii.  
 Lisätty backendin virheenkäsittelyn fronttiin ja virheilmoitukset UIhin.  
 
-3.22: lint-konfiguraatio  - git branch part3-22  
+3.22: lint-konfiguraatio    
 Asennettu npm install eslint --save-dev  
 Muodostettu alustava konfis  
 node_modules/.bin/eslint --init 
@@ -88,6 +92,8 @@ konfis tallentuu .eslintrc.js tiedostoon
 Luotu .eslintignore tiedosto  
 npm run lint   
 Korjattu Eslintin ilmoittavat virheet  
+
+Versio tallennettu github-master  
 
 Kaikki ja viimeinen tehtävä tehty.
 Huomioita  
